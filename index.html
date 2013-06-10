@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RemoteDOM PoC</title>
+        <script src="http://cdn.peerjs.com/0/peer.min.js"></script>
+        
+        <link rel="stylesheet" href="dist/remote-dom.css" />
+        <script src="dist/remote-dom.js"></script>
+    </head>
+    <body>
+        <h1>RemoteDOM Polyfill Demo</h1>
+        <div>This text is displayed on the primary device (e.g. a phone)</div>
+        <div data-screen="remote">
+            <h1>This text is displayed on the secondary device (e.g. a smart TV)</h1>
+        </div>
+        <button id="showImg">Show some image!</button>
+        <script>
+            document.getElementById("showImg").onclick = function() {
+                var img = new Image();
+                img.src = "http://www.nataliedee.com/062311/yay-everything-is-great.jpg";
+                document.querySelector("[data-screen]").appendChild(img);
+            };
+            remoteDOM.connectDisplay(window.prompt("Enter Display ID", ""));
+        </script>
+    </body>
+</html>

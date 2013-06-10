@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="http://cdn.peerjs.com/0/peer.min.js"></script>
+        <script src="dist/remote-dom.js"></script>
+    </head>
+    <body>
+        <div id="container">
+            <p>This is display <span id="displayId"></span></p>
+        </div>
+        <script>
+            document.getElementById("displayId").innerHTML = remoteDOM.getId();
+            remoteDOM.createDisplay(document.getElementById("container"));
+        </script>
+    </body>
+</html>

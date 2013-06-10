@@ -1,0 +1,17 @@
+{
+  "name": "remoteDOM",
+  "version": "0.0.1",
+  "description": "Proof of concept for remote DOM",
+  "main": "index.html",
+  "scripts": {
+  },
+  "dependencies": {
+    "token.js": "0.0.1",
+    "grunt": "0.4",
+    "grunt-browserify": "",
+    "grunt-contrib-copy": ""
+  },
+  "repository": "",
+  "author": "Martin Naumann",
+  "license": "BSD"
+}
