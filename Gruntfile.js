@@ -15,9 +15,19 @@ module.exports = function(grunt) {
                     }
                 ]
             }
+        },
+        express: {
+            server: {
+                options: {
+                    bases: ["./"]
+                }
+            }
         }
     });
     
     grunt.loadNpmTasks("grunt-browserify");
-    grunt.loadNpmTasks("grunt-contrib-copy");    
+    grunt.loadNpmTasks("grunt-express");
+    grunt.loadNpmTasks("grunt-contrib-copy");  
+    
+    grunt.registerTask('server', ['express', 'express-keepalive']);        
 };
