@@ -8,8 +8,9 @@
   "dependencies": {
     "token.js": "0.0.1",
     "grunt": "0.4",
-    "grunt-browserify": "",
-    "grunt-contrib-copy": ""
+    "grunt-browserify": "1.0.2",
+    "grunt-contrib-copy": "0.4.1",
+    "grunt-express": "0.3.6"
   },
   "repository": "",
   "author": "Martin Naumann",
