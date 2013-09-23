@@ -52,7 +52,7 @@ Well, if this stuff becomes a standard, display devices (think: Apple TVs, Smart
 
 
 ## Support the W3 group proposal
-Get a (free!) W3 account and support the [proposed RemoteDOM group @ W3C](http://www.w3.org/community/groups/proposed/#remotedom)
+Get a (free!) W3 account and support the [ RemoteDOM group @ W3C](http://www.w3.org/community/remotedom)
 
 ## Caveats of the polyfill
 Right now the polyfill has two drawbacks:
