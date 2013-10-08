@@ -21,7 +21,56 @@ window.remoteDOM = (function() {
         });
     };
     
+    var launchOnChromecast = function(receiver) {
+    //AppID f5839d2f-c2c5-46c9-9b5e-f2e1fe6a1ebd
+      var request = new cast.LaunchRequest("f5839d2f-c2c5-46c9-9b5e-f2e1fe6a1ebd", receiver);
+      request.description = new cast.LaunchDescription();
+      request.description.text = "RemoteDOM Display!";
+      cast_api.launch(request, function(activity) {
+        var remoteDOMElement = document.querySelector("[data-screen]");
+        cast_api.sendMessage(activity.activityId, "remotedom", remoteDOMElement.innerHTML);
+        var observer = new MutationObserver(function(mutations) {
+            //Missing a way of converting DOM nodes to JSON right now :(
+            cast_api.sendMessage(activity.activityId, "remotedom", remoteDOMElement.innerHTML);
+        });    
+        observer.observe(remoteDOMElement, {attributes: true, childList: true, characterData: true});        
+          
+      });
+    };
+    
+    var initializeChromecast = function() {
+        console.log("Initializing Chromecast API...");        
+        cast_api = new cast.Api();
+        window.cast_api = cast_api;
+        cast_api.addReceiverListener("f5839d2f-c2c5-46c9-9b5e-f2e1fe6a1ebd", function(list) {
+          launchOnChromecast(list[0]);
+        });    
+    };
+    
+    
+    self.connectChromecastDisplay = function() {
+        if (window.cast && window.cast.isAvailable) {
+            // Cast is known to be available
+            initializeChromecast();
+        } else {
+          // Wait for API to post a message to us
+          window.addEventListener("message", function(event) {
+            if (event.source == window && event.data && 
+                event.data.source == "CastApi" &&
+                event.data.event == "Hello")
+              initializeChromecast();
+          });
+        }
+        
+    };
+    
     self.connectDisplay = function(displayId) {
+        console.log(displayId, displayId === '', displayId == false);
+        if((!displayId) || displayId === '') {
+          self.connectChromecastDisplay();
+          return;
+        }
+        
         var connection = peer.connect(displayId);
         var remoteDOMElement = document.querySelector("[data-screen]");
         connection.on('open', function() {
